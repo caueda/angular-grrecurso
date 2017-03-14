@@ -1,3 +1,12 @@
 <h1>
   {{title}}
 </h1>
+<h2>Detalhes {{usuario.nome}}</h2>
+
+<p>Usuarios:</p>
+
+<ul>
+	<li *ngFor="let usuario of usuarios">
+		{{usuario.nome}}
+	</li>
+</ul>

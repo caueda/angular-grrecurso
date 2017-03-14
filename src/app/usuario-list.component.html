@@ -1,0 +1,10 @@
+<h2>GRRecurso</h2>
+
+<p><i>Selecione um usuário da lista</i></p>
+<ul>
+	<li *ngFor="let usuario of Usuarios" (click)="selectUsuario(usuario)">
+		{{usuario.nome}}
+	</li>
+</ul>
+
+<usuario-detalhe *ngIf="selectUsuario" [usuario]="selectUsuario"></usuario-detalhe>
