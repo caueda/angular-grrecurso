@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-@Component
-export class Usuario {	
-	idUsuario: number;
-	nome: string;
-	email: string;
+export class Usuario {  
+	constructor(
+		public idUsuario: number,
+		public nome: string,
+		public email: string){}
 }
