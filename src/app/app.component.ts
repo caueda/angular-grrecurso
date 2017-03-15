@@ -1,32 +1,37 @@
-import { Component } from '@angular/core';
-import { Usuario } from './app.usuario.component';
-import { UsuarioService } from './usuario.service';
+import { Component, OnInit } from '@angular/core';
+import { Usuario } from './usuario/usuario.component';
+import { UsuarioService } from './usuario/usuario.service';
+import { Observable }       from 'rxjs/Observable';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
 	
   constructor(public usuarioService: UsuarioService){}
   
   usuarios: Usuario[];
+  usuarioSelecionado: Usuario;
+  
   error: any;
   
   title = 'GRRecurso';
   
-  getUsuarios() {
-	    this.usuarioService.getUsuarios().subscribe(
+  ngOnInit(): void {
+	  this.getUsuarios();
+  }
+  
+  getUsuarios(): void {
+	  	    this.usuarioService.getUsuarios().subscribe(
 					usuarios => this.usuarios = usuarios,
 					error => this.error = <any>error
 				);
   }
   
-  usuario: Usuario = {
-		idUsuario: 1,
-		nome:'Administrador',
-		email:'admin@angular.io'
-  };
+  onSelect(usuario: Usuario): void {
+	  this.usuarioSelecionado = usuario;
+  }  
 }
 

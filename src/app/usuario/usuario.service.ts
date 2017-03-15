@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Jsonp } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-import { Usuario } from './app.usuario.component';
+import { Usuario } from './usuario/usuario.component';
 
 @Injectable()
 export class UsuarioService {
 	private usuariourl = 'http://localhost:8080/GRRecurso/resources/usuario';
 	
-	constructor(private http: Http){}
+	constructor(private http: Http,
+				private jsonp: Jsonp){}
 	
 	getUsuariosMock() {
 		return   [{idUsuario:1,nome:'Administrator',email:'admin@angular.io'},
@@ -26,14 +27,14 @@ export class UsuarioService {
 						.catch(this.handleError);
 	}
 	
+	
 	private extractData(res: Response){
 		let body = res.json();		
-		return body.data as Usuario[];
+		return body;
 	}
 	
 	private handleError(error: Response | any) {
-		let errMsg: string;
-		console.error('Oh shit...', errMsg);
+		let errMsg: string;		
 		if(error instanceof Response){
 			const body = error.json() || '';
 			const err = body.error || JSON.stringify(body);

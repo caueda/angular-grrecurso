@@ -1,12 +1,15 @@
 <h1>
   {{title}}
 </h1>
-<h2>Detalhes {{usuario.nome}}</h2>
 
-<p>Usuarios:</p>
 
-<ul>
-	<li *ngFor="let usuario of usuarios">
-		{{usuario.nome}}
+<p>Usuarios</p>
+	
+<ul class="usuarios">
+	<li *ngFor="let usuario of usuarios" (click)="onSelect(usuario)"
+		[class.selected]="usuario === usuarioSelecionado">
+		<span class="badge">{{usuario.idUsuario}}</span>{{usuario.nome}}
 	</li>
 </ul>
+
+<usuario-detalhe [usuario]="usuarioSelecionado"></usuario-detalhe>

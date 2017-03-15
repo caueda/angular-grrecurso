@@ -1,0 +1,13 @@
+<div *ngIf="usuario">
+	<h2>Detalhes {{usuario.nome}}</h2>
+	<div>
+		<label>Nome:</label>
+		<input [(ngModel)]="usuario.nome" placeholder="nome">
+	</div>
+
+	<div>
+		<label>E-mail:</label>
+		<input [(ngModel)]="usuario.email" placeholder="E-mail">
+	</div>
+</div>
+
