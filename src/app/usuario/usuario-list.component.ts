@@ -1,3 +1,5 @@
+import { Usuario } from './usuario';
+
 @Component({
 	moduleId: module.id,
 	selector: 'usuario-lista',

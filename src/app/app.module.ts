@@ -6,11 +6,13 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { UsuarioService } from './usuario/usuario.service';
 import { UsuarioDetalheComponent } from './usuario/usuario-detalhe.component';
+import { UsuarioFormComponent } from './usuario/usuario-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-	UsuarioDetalheComponent
+	UsuarioDetalheComponent,
+	UsuarioFormComponent
   ],
   imports: [
     BrowserModule,

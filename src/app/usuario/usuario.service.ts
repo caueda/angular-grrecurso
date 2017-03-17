@@ -5,11 +5,10 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-import { Usuario } from './usuario/usuario.component'
+import { Usuario } from './usuario';
 
 @Injectable()
 export class UsuarioService {
-	private usuariourl = 'http://localhost:8080/GRRecurso/public/api/rest/usuario';
 	
 	constructor(private http: Http,
 				private jsonp: Jsonp){}
@@ -22,7 +21,7 @@ export class UsuarioService {
 	}
 	
 	getUsuarios(): Observable<Usuario[]>{		
-		return this.http.get(this.usuariourl)
+		return this.http.get('http://localhost:8080/GRRecurso/public/api/rest/usuario')
 		                .map(this.extractData)
 						.catch(this.handleError);
 	}

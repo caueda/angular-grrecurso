@@ -1,5 +1,3 @@
-import { Component } from '@angular/core';
-
 export class Usuario {  
 	constructor(
 		public idUsuario: number,
