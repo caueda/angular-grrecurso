@@ -2,14 +2,9 @@
   {{title}}
 </h1>
 
+<nav>
+	<a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+	<a routerLink="/usuarios" routerLinkActive="active">Usuários</a>
+</nav>
 
-<p>Usuarios</p>
-	
-<ul class="usuarios">
-	<li *ngFor="let usuario of usuarios" (click)="onSelect(usuario)"
-		[class.selected]="usuario === usuarioSelecionado">
-		<span class="badge">{{usuario.idUsuario}}</span>{{usuario.nome}}
-	</li>
-</ul>
-
-<usuario-detalhe [usuario]="usuarioSelecionado"></usuario-detalhe>
+<router-outlet></router-outlet>

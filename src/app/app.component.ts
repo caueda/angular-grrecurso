@@ -8,30 +8,7 @@ import { Observable }       from 'rxjs/Observable';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent{
 	
-  constructor(public usuarioService: UsuarioService){}
-  
-  usuarios: Usuario[];
-  usuarioSelecionado: Usuario;
-  
-  error: any;
-  
-  title = 'GRRecurso';
-  
-  ngOnInit(): void {
-	  this.getUsuarios();
-  }
-  
-  getUsuarios(): void {
-	  	    this.usuarioService.getUsuarios().subscribe(
-					usuarios => this.usuarios = usuarios,
-					error => this.error = <any>error
-				);
-  }
-  
-  onSelect(usuario: Usuario): void {
-	  this.usuarioSelecionado = usuario;
-  }  
 }
 

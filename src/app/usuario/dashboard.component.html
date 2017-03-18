@@ -1,0 +1,9 @@
+﻿<h3>Usuários</h3>
+
+<div class="grid grid-pad">
+	<div *ngFor="let usuario of usuarios" [routerLink]="['/detalhe', usuario.idUsuario]" class="col-1-4">
+		<div class="module usuario">
+			<h4>{{usuario.nome}}</h4>
+		</div>
+	</div>
+</div>

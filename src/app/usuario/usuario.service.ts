@@ -13,6 +13,8 @@ export class UsuarioService {
 	constructor(private http: Http,
 				private jsonp: Jsonp){}
 	
+	private usuarioUrl = 'http://localhost:8080/GRRecurso/public/api/rest/usuario';
+	
 	getUsuariosMock() {
 		return   [{idUsuario:1,nome:'Administrator',email:'admin@angular.io'},
               {idUsuario:2,nome:'weblogic',email:'weblogic@oracle'}, 
@@ -21,7 +23,13 @@ export class UsuarioService {
 	}
 	
 	getUsuarios(): Observable<Usuario[]>{		
-		return this.http.get('http://localhost:8080/GRRecurso/public/api/rest/usuario')
+		return this.http.get(this.usuarioUrl)
+		                .map(this.extractData)
+						.catch(this.handleError);
+	}
+	
+	getUsuario(idUsuario: number): Observable<Usuario>{		
+		return this.http.get(`${this.usuarioUrl}/${idUsuario}`)
 		                .map(this.extractData)
 						.catch(this.handleError);
 	}
@@ -29,7 +37,7 @@ export class UsuarioService {
 	updateUsuario(): Observable<string>{
 		let headers = new Headers({ 'Content-Type': 'application/json' });
 		let options = new RequestOptions({ headers: headers });
-		return this.http.post('http://localhost:8080/GRRecurso/public/api/rest/usuario/update', 
+		return this.http.post(this.usuarioUrl + "/update", 
 		{}, 
 		options)
 		.map(this.extractData)
