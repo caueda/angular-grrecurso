@@ -14,6 +14,7 @@ export class UsuarioDetalheComponent implements OnInit{
 	
 	@Input()
 	usuario: Usuario;
+	resultado: string;
 	error : any;
 	
 	constructor(
@@ -27,6 +28,13 @@ export class UsuarioDetalheComponent implements OnInit{
 		.switchMap((params: Params) => this.usuarioService.getUsuario(+params['idUsuario']))
 		.subscribe(usuario => this.usuario = usuario,
 		           error => this.error = <any> error);
+	}
+	
+	update(): void {
+		this.usuarioService.updateUsuario(this.usuario).subscribe(
+			resultado => this.resultado = resultado,
+			error => this.error = <any>error
+		);
 	}
 	
 	goBack(): void {
