@@ -1,8 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Usuario } from './usuario';
 import { UsuarioService } from './usuario.service';
+
+import { statusList } from './data-model';
+
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -12,6 +16,8 @@ import 'rxjs/add/operator/switchMap';
 })
 export class UsuarioDetalheComponent implements OnInit{
 	
+	usuarioForm: FormGroup;
+	statusList = statusList;	
 	@Input()
 	usuario: Usuario;
 	resultado: string;
@@ -20,14 +26,24 @@ export class UsuarioDetalheComponent implements OnInit{
 	constructor(
 		private usuarioService: UsuarioService,
 		private route: ActivatedRoute,
+		private fb: FormBuilder,
 		private location: Location
 	){}
 	
 	ngOnInit(): void {
+		this.createForm();
 		this.route.params
 		.switchMap((params: Params) => this.usuarioService.getUsuario(+params['idUsuario']))
 		.subscribe(usuario => this.usuario = usuario,
 		           error => this.error = <any> error);
+	}
+	
+	createForm(){
+		this.usuarioForm = this.fb.group({
+			name: ['', Validators.required],
+			email: ['', Validators.required],
+			situacao: '',
+		});
 	}
 	
 	update(): void {

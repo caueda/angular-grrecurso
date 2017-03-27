@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
@@ -24,6 +24,7 @@ import { UsuarioRoutingModule } from './usuario/usuario-routing.module';
   imports: [
     BrowserModule,
     FormsModule,
+	ReactiveFormsModule,
     HttpModule,
 	JsonpModule,
 	UsuarioRoutingModule
