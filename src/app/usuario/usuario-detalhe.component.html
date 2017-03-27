@@ -3,18 +3,17 @@
 
 	<form [formGroup]="usuarioForm" novalidate>
 		<div class="form-group">
-			<label class="center-block">Name:
-				<input class="form-control" formControlName="name">
-			</label>			
+			<label class="center-block">Nome:</label>			
+			<input class="form-control" formControlName="nome">
 		</div>
 		
 		<div class="form-group">
-			<label class="center-block">E-mail:
-				<input class="form-control" formControlName="email">
-			</label>
+			<label class="center-block">E-mail:</label>
+			<input class="form-control" formControlName="email">
 		</div>
 		
 		<div class="form-group">
+			<label class="center-block">Situação:</label>
 			<select class="form-control"
 				formControlName="situacao">				
 				<option *ngFor="let situacao of statusList" [value]="situacao.id">{{situacao.desc}}</option>

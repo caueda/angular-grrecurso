@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
@@ -28,10 +28,23 @@ export class UsuarioDetalheComponent implements OnInit{
 		private route: ActivatedRoute,
 		private fb: FormBuilder,
 		private location: Location
-	){}
-	
-	ngOnInit(): void {
+	){
 		this.createForm();
+	}
+	
+	ngOnChanges(){
+		/*
+		this.usuarioForm.reset({
+			nome: this.usuario.nome,
+			email: this.usuario.email
+		});
+		*/
+		this.usuarioForm.patchValue({
+			nome: this.usuario.nome
+		});
+	}
+	
+	ngOnInit(): void {		
 		this.route.params
 		.switchMap((params: Params) => this.usuarioService.getUsuario(+params['idUsuario']))
 		.subscribe(usuario => this.usuario = usuario,
@@ -40,7 +53,7 @@ export class UsuarioDetalheComponent implements OnInit{
 	
 	createForm(){
 		this.usuarioForm = this.fb.group({
-			name: ['', Validators.required],
+			nome: ['', Validators.required],
 			email: ['', Validators.required],
 			situacao: '',
 		});
