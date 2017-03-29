@@ -18,8 +18,7 @@ export class UsuarioDetalheComponent implements OnInit{
 	
 	usuarioForm: FormGroup;
 	statusList = statusList;	
-	@Input()
-	usuario: Usuario;
+	@Input() usuario: Usuario;
 	resultado: string;
 	error : any;
 	
@@ -32,23 +31,26 @@ export class UsuarioDetalheComponent implements OnInit{
 		this.createForm();
 	}
 	
-	ngOnChanges(){
-		/*
-		this.usuarioForm.reset({
-			nome: this.usuario.nome,
-			email: this.usuario.email
-		});
-		*/
-		this.usuarioForm.patchValue({
-			nome: this.usuario.nome
-		});
-	}
-	
-	ngOnInit(): void {		
+	ngOnInit(): void {
 		this.route.params
 		.switchMap((params: Params) => this.usuarioService.getUsuario(+params['idUsuario']))
-		.subscribe(usuario => this.usuario = usuario,
+		.subscribe(usuario => {
+									this.usuario = usuario;
+									this.usuarioForm.setValue({
+									nome: this.usuario.nome,
+									email: this.usuario.email,
+									situacao: {id: 1, desc:"Ativo"}});
+							   },
 		           error => this.error = <any> error);
+	}
+	
+	ngOnChanges(){
+		console.log("ngOnChanges=>", this.usuario);
+		this.usuarioForm.setValue({
+			nome: this.usuario.nome,
+			email: this.usuario.email,
+			situacao: {id: 1, desc:"Ativo"}
+		});
 	}
 	
 	createForm(){
