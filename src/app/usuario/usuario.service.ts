@@ -23,7 +23,7 @@ export class UsuarioService {
 	}
 	
 	getUsuarios(): Observable<Usuario[]>{		
-		return this.http.get(this.usuarioUrl)
+		return this.http.get(this.usuarioUrl + '/listall')
 		                .map(this.extractData)
 						.catch(this.handleError);
 	}
