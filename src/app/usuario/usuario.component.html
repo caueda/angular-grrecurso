@@ -1,9 +1,20 @@
-<ul class="usuarios">
-	<li *ngFor="let usuario of usuarios" (click)="onSelect(usuario)"
-		[class.selected]="usuario === usuarioSelecionado">
-		<span class="badge">{{usuario.idUsuario}}</span>{{usuario.nome}}
-	</li>
-</ul>
+<div *ngIf="qtdeUsuarios > 0">
+	<ul class="usuarios">
+		<li *ngFor="let usuario of usuarios" (click)="onSelect(usuario)"
+			[class.selected]="usuario === usuarioSelecionado">
+			<span class="badge">{{usuario.idUsuario}}</span>{{usuario.nome}}
+		</li>
+	</ul>
+</div>
+
+<div *ngIf="qtdeUsuarios == 0" style="padding-top: 11px;">
+	<div class="alert alert-info" role="alert">
+	  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+	  <span class="sr-only">Mensagem:</span>
+	  Nenhum usuário logado.
+	</div>
+</div>
+
 <div *ngIf="usuarioSelecionado">
 	<h2>
 		{{usuarioSelecionado.nome | uppercase}}

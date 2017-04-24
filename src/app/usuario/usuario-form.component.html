@@ -1,0 +1,26 @@
+﻿<div class="container" *ngIf="usuario">
+	<form (ngSubmit)="update()" #usuarioForm="ngForm">
+	
+		<h2>Detalhes {{usuario.nome}}</h2>
+		
+		<div class="form-group">
+			<label for="nome">Nome:</label>
+			<input id="nome" class="form-control" [(ngModel)]="usuario.nome" 
+				placeholder="nome" required name="nome" #nome="ngModel">
+			<div [hidden]="nome.valid || name.pristine"
+				class="alert alert-danger">
+				O nome é obrigatório.
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="email">E-mail:</label>
+			<input id="email" class="form-control" [(ngModel)]="usuario.email" 
+			placeholder="E-mail" required name="email">
+		</div>
+		<button class="btn btn-default" (click)="goBack()">Voltar</button>
+		<button type="submit" class="btn btn-success" 
+			[disabled]="!usuarioForm.form.valid">Atualizar</button>
+	</form>
+</div>
+

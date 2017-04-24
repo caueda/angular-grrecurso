@@ -16,20 +16,20 @@ export class UsuarioComponent implements OnInit{
   
   usuarios: Usuario[];
   usuarioSelecionado: Usuario;
-  
+  qtdeUsuarios: number = 0;
   error: any;
   
-  title = 'GRRecurso';
   
   ngOnInit(): void {
-	  this.getUsuarios();
+	  this.getUsuarios();	
   }
   
   getUsuarios(): void {
-	  	    this.usuarioService.getUsuarios().subscribe(
-					usuarios => this.usuarios = usuarios,
+	  	    this.usuarioService.getUsuariosLogados().subscribe(
+					usuarios => { this.usuarios = usuarios; this.qtdeUsuarios = usuarios.length;},
 					error => this.error = <any>error
-				);
+				);	
+			
   }
   
   onSelect(usuario: Usuario): void {

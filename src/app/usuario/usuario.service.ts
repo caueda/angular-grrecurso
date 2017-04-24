@@ -28,6 +28,12 @@ export class UsuarioService {
 						.catch(this.handleError);
 	}
 	
+	getUsuariosLogados(): Observable<Usuario[]>{		
+		return this.http.get(this.usuarioUrl + '/listallLogado')
+		                .map(this.extractData)
+						.catch(this.handleError);
+	}
+	
 	getUsuario(idUsuario: number): Observable<Usuario>{		
 		return this.http.get(`${this.usuarioUrl}/${idUsuario}`)
 		                .map(this.extractData)
@@ -37,11 +43,9 @@ export class UsuarioService {
 	updateUsuario(usuario: Usuario): Observable<string>{
 		let headers = new Headers({ 'Content-Type': 'application/json' });
 		let options = new RequestOptions({ headers: headers });
-		return this.http.post(this.usuarioUrl + "/update", 
-		JSON.stringify(usuario), 
-		options)
-		.map(this.extractData)
-		.catch(this.handleError);
+		return this.http.post(this.usuarioUrl + "/update", JSON.stringify(usuario), options)
+			.map(this.extractData)
+			.catch(this.handleError);
 	}
 	
 	private extractData(res: Response){

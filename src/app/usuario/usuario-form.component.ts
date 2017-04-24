@@ -1,19 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
 import { Usuario } from './usuario';
+import { UsuarioService } from './usuario.service';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
-	moduleId: module.id,
 	selector: 'usuario-form',
 	templateUrl: './usuario-form.component.html'
 })
-export class UsuarioFormComponent {
-	situacoes = ['Ativo', 'Inativo'];
+export class UsuarioFormComponent implements OnInit{
 	
-	model = new Usuario(1, 'Nome', 'anonymous@email.com');
+	@Input()
+	usuario: Usuario;
+	resultado: string;
+	error : any;
 	
-	submitted = false;
+	constructor(
+		private usuarioService: UsuarioService,
+		private route: ActivatedRoute,
+		private location: Location
+	){}
 	
-	onSubmit() {
-		this.submitted = true;
+	ngOnInit(): void {
+		this.route.params
+		.switchMap((params: Params) => this.usuarioService.getUsuario(+params['idUsuario']))
+		.subscribe(usuario => this.usuario = usuario,
+		           error => this.error = <any> error);
+	}
+	
+	update(): void {
+		this.usuarioService.updateUsuario(this.usuario).subscribe(
+			resultado => this.resultado = resultado,
+			error => this.error = <any>error
+		);
+	}
+	
+	goBack(): void {
+		this.location.back();
 	}
 }
