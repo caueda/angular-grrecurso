@@ -1,10 +1,20 @@
-<h2>GRRecurso</h2>
+﻿<div style="padding-top: 11px;">
+	<div class="panel panel-default">
+		
+		<div class="panel-heading">Usuários</div>
 
-<p><i>Selecione um usu�rio da lista</i></p>
-<ul>
-	<li *ngFor="let usuario of Usuarios" (click)="selectUsuario(usuario)">
-		{{usuario.nome}}
-	</li>
-</ul>
+		<table class="table table-hover table-responsive">
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>E-mail</th>
+			</tr>
+			<tr *ngFor="let usuario of usuarios" [routerLink]="['/detalhe', usuario.idUsuario]">
+				<td>{{usuario.idUsuario}}</td>
+				<td>{{usuario.nome}}</td>
+				<td>{{usuario.email}}</td>
+			</tr>
+		</table>
 
-<usuario-form *ngIf="selectUsuario" [usuario]="selectUsuario"></usuario-form>
+	</div>
+</div>

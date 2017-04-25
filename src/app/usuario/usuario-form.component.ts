@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { Usuario } from './usuario';
+import { BeanMessage } from './bean-message';
 import { UsuarioService } from './usuario.service';
 import 'rxjs/add/operator/switchMap';
 
@@ -13,7 +14,9 @@ export class UsuarioFormComponent implements OnInit{
 	
 	@Input()
 	usuario: Usuario;
-	resultado: string;
+	showError: boolean = false;
+	showSuccess: boolean = false;
+	beanMessage: BeanMessage;
 	error : any;
 	
 	constructor(
@@ -31,7 +34,16 @@ export class UsuarioFormComponent implements OnInit{
 	
 	update(): void {
 		this.usuarioService.updateUsuario(this.usuario).subscribe(
-			resultado => this.resultado = resultado,
+			beanMessage => {
+				this.beanMessage = beanMessage; 
+				if(beanMessage.codigo == 100) {
+					this.showSuccess = true;
+					this.showError = false;
+				} else if(beanMessage.codigo < 0){
+					this.showSuccess = false;
+					this.showError = true;
+				}					
+			},
 			error => this.error = <any>error
 		);
 	}

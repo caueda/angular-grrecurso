@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { UsuarioService } from './usuario/usuario.service';
 import { UsuarioFormComponent } from './usuario/usuario-form.component';
 import { UsuarioComponent } from './usuario/usuario.component';
-import { DashboardComponent } from './usuario/dashboard.component';
+import { UsuarioListComponent } from './usuario/usuario-list.component';
 import { UsuarioRoutingModule } from './usuario/usuario-routing.module';
 
 
@@ -17,7 +17,7 @@ import { UsuarioRoutingModule } from './usuario/usuario-routing.module';
     AppComponent,
 	UsuarioFormComponent,
 	UsuarioComponent,
-	DashboardComponent
+	UsuarioListComponent
   ],
   imports: [
     BrowserModule,

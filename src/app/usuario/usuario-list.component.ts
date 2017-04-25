@@ -1,22 +1,23 @@
+import { Component, OnInit } from '@angular/core';
 import { Usuario } from './usuario';
+import { UsuarioService } from './usuario.service';
 
 @Component({
-	moduleId: module.id,
-	selector: 'usuario-lista',
+	selector: 'usuario-dashboard',
 	templateUrl: './usuario-list.component.html',
-	providers: [UsuarioService]
+	styleUrls: ['./usuario-list.component.css']	
 })
 export class UsuarioListComponent implements OnInit {
 	usuarios: Usuario[];
-	usuarioSelecionado: Usuario;
+	error: any;
 	
-	constructor(private service: UsuarioService){}
+	constructor(private usuarioService: UsuarioService){}
 	
-	ngOnInit(){
+	ngOnInit(): void {
 		
-	}
-	
-	selectUsuario(usuario: Usuario) {
-		this.usuarioSelecionado = usuario;
+		this.usuarioService.getUsuarios().subscribe(					
+					usuarios => this.usuarios = usuarios,
+					error => this.error = <any>error
+				);
 	}
 }

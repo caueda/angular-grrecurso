@@ -21,6 +21,28 @@
 		<button class="btn btn-default" (click)="goBack()">Voltar</button>
 		<button type="submit" class="btn btn-success" 
 			[disabled]="!usuarioForm.form.valid">Atualizar</button>
+			
+		<div *ngIf="showSuccess" style="padding-top: 11px;">							
+			<div class="alert alert-success alert-dismissible" role="alert">				
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"
+					(click)="showSuccess=false">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				{{beanMessage.mensagem}}
+			</div>			
+		</div>
+		<div *ngIf="showError" style="padding-top: 11px;">			
+			<div class="alert alert-danger alert-dismissible" role="alert">				
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"
+					(click)="showError=false">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				{{beanMessage.mensagem}}
+			</div>	
+		</div>
+		
 	</form>
+	
+
 </div>
 

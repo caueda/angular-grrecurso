@@ -6,6 +6,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 import { Usuario } from './usuario';
+import { BeanMessage } from './bean-message';
 
 @Injectable()
 export class UsuarioService {
@@ -40,7 +41,7 @@ export class UsuarioService {
 						.catch(this.handleError);
 	}
 	
-	updateUsuario(usuario: Usuario): Observable<string>{
+	updateUsuario(usuario: Usuario): Observable<BeanMessage>{
 		let headers = new Headers({ 'Content-Type': 'application/json' });
 		let options = new RequestOptions({ headers: headers });
 		return this.http.post(this.usuarioUrl + "/update", JSON.stringify(usuario), options)
@@ -49,7 +50,8 @@ export class UsuarioService {
 	}
 	
 	private extractData(res: Response){
-		let body = res.json();		
+		console.log(">>>>>> response ", res);
+		let body = res.json();				
 		return body;
 	}
 	
