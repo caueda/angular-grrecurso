@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { Usuario } from './usuario';
@@ -10,7 +10,7 @@ import 'rxjs/add/operator/switchMap';
 	selector: 'usuario-form',
 	templateUrl: './usuario-form.component.html'
 })
-export class UsuarioFormComponent implements OnInit{
+export class UsuarioFormComponent implements OnInit, OnDestroy {
 	
 	@Input()
 	usuario: Usuario;
@@ -19,6 +19,7 @@ export class UsuarioFormComponent implements OnInit{
 	beanMessage: BeanMessage;
 	error : any;
 	
+	
 	constructor(
 		private usuarioService: UsuarioService,
 		private route: ActivatedRoute,
@@ -26,10 +27,15 @@ export class UsuarioFormComponent implements OnInit{
 	){}
 	
 	ngOnInit(): void {
+		
 		this.route.params
 		.switchMap((params: Params) => this.usuarioService.getUsuario(+params['idUsuario']))
 		.subscribe(usuario => this.usuario = usuario,
 		           error => this.error = <any> error);
+	}
+	
+	ngOnDestroy(): void {
+
 	}
 	
 	update(): void {

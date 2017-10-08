@@ -2,7 +2,7 @@
 	<form (ngSubmit)="update()" #usuarioForm="ngForm">
 	
 		<h2>Detalhes {{usuario.nome}}</h2>
-		
+		<fieldset>
 		<div class="form-group">
 			<label for="nome">Nome:</label>
 			<input id="nome" class="form-control" [(ngModel)]="usuario.nome" 
@@ -40,7 +40,7 @@
 				{{beanMessage.mensagem}}
 			</div>	
 		</div>
-		
+		</fieldset>
 	</form>
 	
 

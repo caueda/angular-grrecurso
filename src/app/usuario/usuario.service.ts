@@ -24,13 +24,15 @@ export class UsuarioService {
 	}
 	
 	getUsuarios(): Observable<Usuario[]>{		
-		return this.http.get(this.usuarioUrl + '/listall')
+	    let url = `${this.usuarioUrl}/listall`;
+		return this.http.get(url)
 		                .map(this.extractData)
 						.catch(this.handleError);
 	}
 	
-	getUsuariosLogados(): Observable<Usuario[]>{		
-		return this.http.get(this.usuarioUrl + '/listallLogado')
+	getUsuariosLogados(): Observable<Usuario[]>{
+		let url = `${this.usuarioUrl}/listallLogado`;
+		return this.http.get(url)
 		                .map(this.extractData)
 						.catch(this.handleError);
 	}
@@ -42,8 +44,15 @@ export class UsuarioService {
 	}
 	
 	updateUsuario(usuario: Usuario): Observable<BeanMessage>{
-		let headers = new Headers({ 'Content-Type': 'application/json' });
-		let options = new RequestOptions({ headers: headers });
+		console.log("update usuário");
+		let headers = new Headers();		
+		headers.append('Content-Type', 'application/json');
+		//headers.append('Access-Control-Allow-Origin', '*');
+		let options = new RequestOptions();
+		
+		options.headers = headers;
+		
+		let url = `${this.usuarioUrl}/update`;
 		return this.http.post(this.usuarioUrl + "/update", JSON.stringify(usuario), options)
 			.map(this.extractData)
 			.catch(this.handleError);
