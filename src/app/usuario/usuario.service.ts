@@ -38,8 +38,13 @@ export class UsuarioService {
 	}
 	
 	getUsuario(idUsuario: number): Observable<Usuario>{		
-		return this.http.get(`${this.usuarioUrl}/${idUsuario}`)
-		                .map(this.extractData)
+		console.log('passou por getUsuario');
+		let url = `${this.usuarioUrl}/${idUsuario}`;
+		return this.http.get(url)
+		                .map(res => {
+							let item = res.json();
+							return new Usuario(item.idUsuario, item.nome, item.email);
+						})
 						.catch(this.handleError);
 	}
 	
@@ -60,12 +65,14 @@ export class UsuarioService {
 	
 	private extractData(res: Response){
 		console.log(">>>>>> response ", res);
-		let body = res.json();				
-		return body;
+		return res.json().map(item => {
+			return new Usuario(item.idUsuario, item.nome, item.email);
+		});		
 	}
 	
 	private handleError(error: Response | any) {
 		let errMsg: string;		
+		console.log(error);
 		if(error instanceof Response){
 			const body = error.json() || '';
 			const err = body.error || JSON.stringify(body);
